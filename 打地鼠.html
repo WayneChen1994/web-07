@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+			#scorebar{
+				width: 200px;
+				margin: 0 auto;
+				background: orange;
+			}
+			
+			#info{
+				margin-top: 30px;
+				text-align: center;
+			}
+			
+			.box{
+				width: 325px;
+				height: 325px;
+				margin: 50px auto;
+				border: 1px solid dodgerblue;
+				background: url("img/caodi.jpg") no-repeat center center;
+				background-size: cover;
+			}
+			
+			.box .sub-box{
+				width: 100px;
+				height: 100px;
+				border: 1px solid whitesmoke;
+				float: left;
+				margin-left: 10px;
+				margin-top: 10px;
+			}
+			
+			.sub-box:hover{
+				opacity: 0.5;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="scorebar">
+			<h1 id="score">当前分数：0</h1>
+			<h1 id="timeleft">剩余时间：50</h1>
+		</div>
+		<h1 id="info">试试看</h1>
+		<div class="box">
+			<div class="sub-box" id="1" onclick="beat(this)"></div>
+			<div class="sub-box" id="2" onclick="beat(this)"></div>
+			<div class="sub-box" id="3" onclick="beat(this)"></div>
+			<div class="sub-box" id="4" onclick="beat(this)"></div>
+			<div class="sub-box" id="5" onclick="beat(this)"></div>
+			<div class="sub-box" id="6" onclick="beat(this)"></div>
+			<div class="sub-box" id="7" onclick="beat(this)"></div>
+			<div class="sub-box" id="8" onclick="beat(this)"></div>
+			<div class="sub-box" id="9" onclick="beat(this)"></div>
+		</div>
+		<script type="text/javascript">
+			var times = 50;
+                        var score = 0;
+                        
+                        function beat(obj) {
+                                var status = document.getElementById("info");
+                                if (obj.style.background){
+                                        score += 1;
+                                        obj.style.background = null;
+                                        status.style.color = "blue";
+                                        status.innerText = "砸中得一分";
+                                }else{
+                                        status.style.color = "red";
+                                        status.innerText = "错误扣一分";
+                                        score -= 1;
+                                        if (score<0){
+                                                score = 0;
+					}
+				}
+                                document.getElementById("score").innerText = "当前分数：" + score;
+				setTimeout(function () {
+                                        status.style.color = "black";
+                                        status.innerText = "继续加油。。。";
+                                }, 1000);
+                        }
+                        
+                        var to = setTimeout(function () {
+				alert("游戏结束！！！得分为："+score);
+				if (score>=0 && score<20){
+				        alert("你是菜鸡！！！");
+				}else if(score>=20 && score<30){
+				        alert("水平一般！！！");
+				}else if(score>=30 && score<40){
+				        alert("状态良好！！！");
+				}else if(score>=40 && score<50){
+				        alert("你很棒棒哦～");
+				}else if(score=50){
+				        alert("哇～最强王者！！！");
+				}
+				var res = window.confirm("是否重新开始？");
+				if (res){
+                                        window.location.reload(true);
+				}else{
+				        alert("再见～");
+				        window.close();
+				}
+                        },50000);
+                        
+                        var timer = setInterval(function () {
+                                times--;
+                                document.getElementById("timeleft").innerText = "剩余时间：" + times;
+                                if (times==0){
+                                        clearInterval(timer);
+                                }
+                        },1000);
+                        
+                        var show = setInterval(function () {
+                                var boxId = String(Math.floor(Math.random()*9+1));
+                                var currentBox = document.getElementById(boxId);
+                                currentBox.style.background = 'url("img/dishu.jpg") no-repeat center center';
+                                currentBox.style.backgroundSize = 'cover';
+                                setTimeout(function () {
+                                        currentBox.style.background = null;
+                                },Math.random()*3000);
+                        }, Math.random()*1500);
+		</script>
+	</body>
+</html>
