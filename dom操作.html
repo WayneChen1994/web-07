@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>DOM操作</title>
+</head>
+<body>
+        
+        1.获取标签节点
+        方法1：通过id获取，返回一个标签对象
+        document.getElementById("id值");
+        方法2：通过标签名获取，返回一个标签集合
+        document.getElementsByTagName("标签名");
+        方法3：通过name属性获取，返回一个标签集合
+        document.getElementsByName("name属性值");
+        方法4：通过class属性获取，返回一个标签集合
+        document.getElementsByClassName("class属性值");
+----------------------------------------------------------------------------------------
+        <h1 id="tt">标题</h1>
+        <h1>标题2</h1>
+        <h1 name="name1">标题3</h1>
+        <h1 class="class1">标题4</h1>
+        
+        <script type="text/javascript">
+                console.log(document);
+                var obj = document.getElementById("tt");
+                console.log(obj);
+                obj.innerHTML = "hello";
+                var obj2 = document.getElementsByTagName("h1");
+                console.log(obj2);
+                obj2[1].innerHTML = "world";
+                var obj3 = document.getElementsByName("name1");
+                console.log(obj3);
+                var obj4 = document.getElementsByClassName("class1");
+                console.log(obj4);
+        </script>
+</body>
+</html>

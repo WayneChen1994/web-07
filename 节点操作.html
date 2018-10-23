@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>节点操作</title>
+        <style type="text/css">
+                .bg{
+                        background: yellow;
+                }
+                .bg1{
+                        background: red;
+                }
+        </style>
+</head>
+<body>
+---------------------------------------------------------------------------------------
+        节点操作：
+        1、创建节点
+        document.createElement("标签名");
+        
+        2、添加节点【向后添加】：
+        父节点.appendChild(子节点);
+        
+        3、在指定的节点前添加子节点：
+        a.找到父节点
+        b.找到指定节点
+        c.创建新节点
+        d.添加
+        父节点.insertBefore(新节点，指定节点);
+        
+        4、替换节点
+        父节点.replaceChild(新节点，指定节点);
+        
+        5、删除节点
+        父节点.removeChild(指定节点);
+        
+        6、克隆节点
+        被克隆节点.cloneNode();       只克隆当前节点
+        被克隆节点.cloneNode(true);   除了克隆当前节点，还会递归克隆子节点
+
+        7、给元素添加属性
+        方式一：
+        元素.属性名 = 属性值;
+        方式二：
+        a.创建属性节点
+        b.给属性节点设置值
+        c.把属性节点设置给元素
+-----------------------------------------------------------------------------------------
+<ul id="nav1">
+                <li class="li1">貂蝉</li>
+        </ul>
+        
+        <button onclick="add1()">向后添加节点</button>
+        <button onclick="add2()">向前添加节点</button>
+        <button onclick="remove1()">删除子节点</button>
+        <button onclick="replace()">替换节点</button>
+        <button onclick="copy()">克隆节点</button>
+        <button onclick="add3()">添加属性节点1</button>
+        <button onclick="add4()">添加属性节点2</button>
+</body>
+<script type="text/javascript">
+        var num = 0;
+        function add1() {
+                // 创建元素节点
+                var $li = document.createElement("li");
+                // 创建文本节点
+                var $node = document.createTextNode("王昭君" + num);
+                // 将文本节点放入元素节点
+                $li.appendChild($node);
+                // $li.innerHTML = "王昭君";
+                // $li.innerHTML = '<a href="#">王昭君</a>';
+                // 将元素节点添加到指定位置
+                document.getElementById("nav1").appendChild($li);
+                num++;
+        }
+        
+        var num1 = 0;
+        function add2() {
+                var $li = document.createElement("li");
+                $li.innerHTML = "貂蝉" + num1;
+                var _li = document.getElementsByTagName("li")[0];
+                // 添加到指定元素的前面，参数一：新的节点；参数二：指定节点
+                document.getElementById("nav1").insertBefore($li, _li);
+                num1++;
+        }
+
+        function remove1() {
+                var $ul = document.getElementById("nav1");
+                var $li = document.getElementsByClassName("li1")[0];
+                // 删除子节点
+                $ul.removeChild($li);
+        }
+        
+        function replace() {
+                var $ul = document.getElementById("nav1");
+                var $li = document.getElementsByClassName("li1")[0];
+                var _li = document.createElement("p");
+                _li.innerHTML = "西施";
+                // 替换子节点，要通过父节点来进行操作
+                // 参数一：新的节点，参数二：被替换的节点
+                $ul.replaceChild(_li, $li);
+        }
+        
+        function copy() {
+                var $ul = document.getElementById("nav1");
+                // var _ul = $ul.cloneNode();    只克隆父节点本身
+                var _ul = $ul.cloneNode(true);    // 克隆父节点及其子节点，递归克隆
+                $ul.appendChild(_ul);
+        }
+        
+        function add3() {
+                var $ul = document.getElementById("nav1");
+                // 添加class属性
+                $ul.className = "bg";
+                
+                // 添加class属性
+                // $ul.setAttribute("class","bg");
+        }
+        
+        function add4() {
+                // 找到元素
+                var $ul = document.getElementById("nav1");
+                // 创建属性节点
+                var $cls = document.createAttribute("class");
+                // 给属性节点设置值
+                $cls.value = "bg1";
+                // 把属性节点设置给元素
+                $ul.setAttributeNode($cls);
+        }
+</script>
+</html>
