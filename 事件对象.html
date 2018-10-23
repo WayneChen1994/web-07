@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>事件对象</title>
+        <style type="text/css">
+                #box{
+                        width: 500px;
+                        height: 500px;
+                        background: whitesmoke;
+                        position: relative;
+                }
+                .circle{
+                        width: 20px;
+                        height: 20px;
+                        background: red;
+                        border-radius: 50%;
+                        position: absolute;
+                }
+        </style>
+</head>
+<body>
+        <div id="box"></div>
+        <script type="text/javascript">
+                document.getElementById("box").onclick = function (e) {
+                        // 获取鼠标点击的位置
+                        var x = e.clientX;
+                        var y = e.clientY;
+                        
+                        // 创建元素节点
+                        var $div = document.createElement("div");
+                        $div.className = "circle";
+        
+                        // 设置宽高
+                        r = Math.floor(Math.random()*20+1) ;
+                        $div.style.height = r + "px";
+                        $div.style.width = r + "px";
+                        
+                        // 给其进行定位
+                        $div.style.left = (x-r/2) + "px";
+                        $div.style.top = (y-r/2) + "px";
+                        
+                        // 圆的颜色随机生成，圆的大小随机生成[1,20]
+                        var $rgb = "rgb(" + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + "," + Math.floor(Math.random()*256) + ")";
+                        
+                        // 设置背景颜色
+                        $div.style.background = $rgb;
+                        
+                        // 追加到父节点
+                        this.appendChild($div);
+                }
+        </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>事件2</title>
+        <style type="text/css">
+                .bg{
+                        background: red;
+                }
+        </style>
+</head>
+<body>
+        <button id="btn1">鼠标单击事件</button>
+        <button id="btn2">鼠标双击事件</button>
+        <button id="btn3">鼠标按下事件</button>
+        <button id="btn4">鼠标抬起事件</button>
+        <button id="btn5">鼠标移入事件</button>
+        <button id="btn6">鼠标移出事件</button>
+        <button id="btn7">鼠标移动事件</button>
+
+        <form action="#" method="post" id="formData">
+                <input type="text" />
+                <input type="submit" value="提交" />
+        </form>
+        
+        <script type="text/javascript">
+                document.getElementById("btn1").onclick = function () {
+                        alert("鼠标单击事件");
+                }
+
+                document.getElementById("btn2").ondblclick = function () {
+                        alert("鼠标双击事件");
+                }
+
+                document.getElementById("btn3").onmousedown = function () {
+                        alert("鼠标按下事件");
+                }
+
+                document.getElementById("btn4").onmouseup = function () {
+                        alert("鼠标抬起事件");
+                }
+
+                document.getElementById("btn5").onmouseover = function () {
+                        // alert("鼠标移入事件");
+                        this.className = "bg";
+                        this.onmouseout = function () {
+                                this.className = "";
+                        }
+                }
+
+                document.getElementById("btn6").onmouseout = function () {
+                        alert("鼠标移出事件");
+                }
+
+                document.getElementById("btn7").onmousemove = function () {
+                        alert("鼠标移动事件");
+                }
+                
+                document.getElementById("formData").onsubmit = function () {
+                        alert("hello");
+                        // 阻止表单提交
+                        return false;
+                }
+        </script>
+</body>
+</html>

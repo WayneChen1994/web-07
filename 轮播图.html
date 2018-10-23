@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>轮播图</title>
+        <style type="text/css">
+                *{
+                        margin: 0;
+                        padding: 0;
+                }
+                #box{
+                        width: 500px;
+                        height: 280px;
+                        margin: 50px auto;
+                        position: relative;
+                        /*overflow: hidden;*/
+                }
+                #pics{
+                        height: 100%;
+                        width: 4000px;
+                        position: absolute;
+                        left: -500px;
+                }
+                #pics img{
+                        display: block;
+                        width: 500px;
+                        height: 280px;
+                        float: left;
+                }
+                #btns{
+                        height: 100px;
+                        width: 500px;
+                        position: absolute;
+                        top: 90px;
+                }
+                .btn{
+                        display: block;
+                        width: 50px;
+                        height: 100px;
+                        background: rgba(0,0,0,0.2);
+                        color: white;
+                        font-size: 30px;
+                        text-align: center;
+                        line-height: 100px;
+                        border-radius: 10px;
+                }
+                .btn:hover{
+                        font-weight: bolder;
+                        font-size: 35px;
+                        background: rgba(0,0,0,0.3);
+                }
+                #left_btn{
+                        float: left;
+                }
+                #right_btn{
+                        float: right;
+                }
+        </style>
+</head>
+<body>
+        <div id="box">
+                <div id="pics">
+                        <img src="img/布偶猫6.jpg" />
+                        <img src="img/布偶猫1.jpg" />
+                        <img src="img/布偶猫2.jpg" />
+                        <img src="img/布偶猫3.jpg" />
+                        <img src="img/布偶猫4.jpg" />
+                        <img src="img/布偶猫5.jpg" />
+                        <img src="img/布偶猫6.jpg" />
+                        <img src="img/布偶猫1.jpg" />
+                </div>
+                
+                <div id="btns">
+                        <span class="btn" id="left_btn">&lt;</span>
+                        <span class="btn" id="right_btn">&gt;</span>
+                </div>
+        </div>
+        <script type="text/javascript">
+                // 首先实现左右两个按钮的切换图片功能
+                // 右边按钮
+                document.getElementById("right_btn").onclick = function () {
+                        var $pics = document.getElementById("pics");
+                        var currentX = $pics.offsetLeft;
+                        console.log("currentX:", currentX);
+                        if (currentX==-3000){
+                                $pics.style.transition = "all 1s";
+                                var nextX = currentX - 500;
+                                $pics.style.left = nextX + "px";
+                                $pics.style.transition = null;
+                                $pics.style.left = -500 + "px";
+                                $pics.style.transition = "all 1s";
+                        }else{
+                                $pics.style.transition = "all 1s";
+                                var nextX = currentX - 500;
+                                $pics.style.left = nextX + "px";
+                        }
+                }
+        </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>事件</title>
+</head>
+<body>
+        <button onclick="alert('hello')">按钮1</button>
+        <button onclick="beat()">按钮2</button>
+        <button id="btn3">按钮3</button>
+        
+        <script type="text/javascript">
+                document.getElementById("btn3").onclick = function () {
+                        alert("nice");
+                }
+                
+                function beat() {
+                        alert("good");
+                }
+        </script>
+</body>
+</html>

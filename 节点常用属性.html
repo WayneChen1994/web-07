@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>节点常用属性</title>
+        <style type="text/css">
+                .bg{
+                        width: 100px;
+                        height: 100px;
+                        background: red;
+                }
+        </style>
+</head>
+<body>
+        <div class="bg">hello world!</div>
+        <script type="text/javascript">
+                // 获取标签节点
+                var obj = document.getElementsByClassName("bg")[0];
+                console.log(obj.nodeName);
+                console.log(obj.nodeType);
+                console.log(obj.nodeValue);
+                
+                // 获取属性节点
+                var $cls = obj.getAttributeNode("class");
+                console.log($cls.nodeName);
+                console.log($cls.nodeType);
+                console.log($cls.nodeValue);
+                
+                // 获取文本节点，标签的第一个子节点就是文本节点
+                var $text = obj.firstChild;
+                // console.log(obj.innerHTML);
+                console.log($text);
+                console.log($text.nodeName);
+                console.log($text.nodeType);
+                console.log($text.nodeValue);
+        </script>
+</body>
+</html>
