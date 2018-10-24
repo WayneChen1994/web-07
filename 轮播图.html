@@ -13,7 +13,7 @@
                         height: 280px;
                         margin: 50px auto;
                         position: relative;
-                        /*overflow: hidden;*/
+                        overflow: hidden;
                 }
                 #pics{
                         height: 100%;
@@ -55,6 +55,25 @@
                 #right_btn{
                         float: right;
                 }
+                #dots{
+                        width: 120px;
+                        height: 30px;
+                        position: absolute;
+                        right: 20px;
+                        bottom: 20px;
+                }
+                #dots .dot{
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                        border: 1px solid white;
+                        margin-top: 10px;
+                        margin-left: 3px;
+                }
+                .currentDot{
+                        background: white;
+                }
         </style>
 </head>
 <body>
@@ -74,25 +93,77 @@
                         <span class="btn" id="left_btn">&lt;</span>
                         <span class="btn" id="right_btn">&gt;</span>
                 </div>
+                
+                <div id="dots">
+                        <span class="dot currentDot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                </div>
         </div>
         <script type="text/javascript">
-                // 首先实现左右两个按钮的切换图片功能
-                // 右边按钮
-                document.getElementById("right_btn").onclick = function () {
+                window.onload = function () {
                         var $pics = document.getElementById("pics");
-                        var currentX = $pics.offsetLeft;
-                        console.log("currentX:", currentX);
-                        if (currentX==-3000){
-                                $pics.style.transition = "all 1s";
-                                var nextX = currentX - 500;
-                                $pics.style.left = nextX + "px";
-                                $pics.style.transition = null;
-                                $pics.style.left = -500 + "px";
-                                $pics.style.transition = "all 1s";
-                        }else{
-                                $pics.style.transition = "all 1s";
-                                var nextX = currentX - 500;
-                                $pics.style.left = nextX + "px";
+                        var $leftBtn = document.getElementById("left_btn");
+                        var $rightBtn = document.getElementById("right_btn");
+                        var dotsArr = document.getElementsByClassName("dot");
+                        var $box = document.getElementById("box");
+        
+                        function showDot() {
+                                var prevIndex;
+                                for (var i=0;i<dotsArr.length;i++){
+                                        if (dotsArr[i].className == "dot currentDot"){
+                                                prevIndex = i;
+                                                dotsArr[prevIndex].className = "dot";
+                                        }
+                                }
+                                var nextIndex = prevIndex + 1;
+                                if (nextIndex==dotsArr.length){
+                                        nextIndex = 0;
+                                }
+                                dotsArr[nextIndex].className = "dot currentDot";
+                        }
+        
+                        function movePic(moves) {
+                                var next_left = $pics.offsetLeft + moves;
+                                $pics.style.transition = "all 1.5s";
+                                if (next_left<-3000){
+                                        $pics.style.transition = null;
+                                        next_left = -500;
+                                }
+                                if (next_left>-500){
+                                        next_left = -3000;
+                                }
+                                showDot();
+                                $pics.style.left = next_left + "px";
+                        }
+        
+                        $leftBtn.onclick = function () {
+                                movePic(500);
+                        }
+        
+                        $rightBtn.onclick = function () {
+                                movePic(-500);
+                        }
+        
+                        var timer;
+        
+                        function autoShow() {
+                                timer = setInterval(function () {
+                                        $rightBtn.onclick();
+                                }, 1500);
+                        }
+        
+                        autoShow();
+        
+                        $box.onmouseout = function(){
+                                autoShow();
+                        }
+        
+                        $box.onmouseover = function(){
+                                clearInterval(timer);
                         }
                 }
         </script>
